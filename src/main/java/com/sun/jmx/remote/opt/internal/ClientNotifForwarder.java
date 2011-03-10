@@ -47,6 +47,7 @@
 package com.sun.jmx.remote.opt.internal;
 
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.io.NotSerializableException;
 
 import java.util.ArrayList;
@@ -485,6 +486,9 @@ public abstract class ClientNotifForwarder {
 	    } catch (NotSerializableException e) {
 		logger.trace("NotifFetcher.fetchNotifs", e);
 		return fetchOneNotif();
+	    } catch (InvalidClassException e) {
+		logger.trace("NotifFetcher.fetchNotifs", e);
+		return fetchOneNotif();
 	    } catch (IOException ioe) {
 		if (!shouldStop()) {
 		    logger.error("NotifFetcher-run",
@@ -552,7 +556,8 @@ public abstract class ClientNotifForwarder {
 		    result = cnf.fetchNotifs(startSequenceNumber, 1, 0L);
 		} catch (Exception e) {
 		    if (e instanceof ClassNotFoundException
-			|| e instanceof NotSerializableException) {
+			|| e instanceof NotSerializableException
+            || e instanceof InvalidClassException) {
 			logger.warning("NotifFetcher.fetchOneNotif",
 				     "Failed to deserialize a notification: "+e.toString());
 			if (logger.traceOn()) {
