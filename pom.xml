@@ -12,7 +12,7 @@
 
     <groupId>org.terracotta</groupId>
     <artifactId>jmxremote_optional-tc</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <name>Project OpenDMK's jmxremote_optional (with TC fixes)</name>
     <description>Based on opendmk-1.0-b02 (http://opendmk.dev.java.net/)</description>
 
