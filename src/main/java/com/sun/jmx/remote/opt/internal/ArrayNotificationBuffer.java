@@ -768,7 +768,8 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
             extends QueryEval implements QueryExp {
         public boolean apply(final ObjectName name) {
             final MBeanServer mbs = QueryEval.getMBeanServer();
-            return isInstanceOf(mbs, name, broadcasterClass);
+            return name.toString().startsWith("org.terracotta") &&
+                   isInstanceOf(mbs, name, broadcasterClass);
         }
     }
     private static final QueryExp broadcasterQuery = new BroadcasterQuery();
