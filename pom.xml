@@ -16,6 +16,15 @@
     <name>Project OpenDMK's jmxremote_optional (with TC fixes)</name>
     <description>Based on opendmk-1.0-b02 (http://opendmk.dev.java.net/)</description>
 
+    <dependencies>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
     <build>
         <plugins>
             <plugin>
