@@ -768,8 +768,29 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
             extends QueryEval implements QueryExp {
         public boolean apply(final ObjectName name) {
             final MBeanServer mbs = QueryEval.getMBeanServer();
-            return name.toString().startsWith("org.terracotta") &&
-                   isInstanceOf(mbs, name, broadcasterClass);
+            /* DEV-6361
+             *
+             * Apache Commons Modeler's BaseModelMBean does not properly clean up
+             * NotificationBroadcasters in removeNotificationListener() thus permanently
+             * keeping hard references onto BufferListener and leading to Perm Gen leaks
+             * which make rejoin leak Perm Gen each time the L1 is re-created.
+             *
+             * This lib is commonly used -by Tomcat for instance- so we have to work around
+             * this bug to prevent L1 classloader Perm Gen leaks by not registering BufferListeners
+             * in BaseModelMBean based MBeans.
+             *
+             * This was fun to track.
+             */
+            boolean leakyNotificationBroadcaster = isInstanceOf(mbs, name, leakyCommonsModelerClass);
+            if (leakyNotificationBroadcaster) {
+                if (logger.debugOn()) {
+                    logger.debug("BroadcasterQuery.apply",
+                            "ignoring leaky Commons Modeler NotificationBroadcaster");
+                }
+                return false;
+            }
+
+            return isInstanceOf(mbs, name, broadcasterClass);
         }
     }
     private static final QueryExp broadcasterQuery = new BroadcasterQuery();
@@ -849,4 +870,7 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
 
     static final String broadcasterClass =
         NotificationBroadcaster.class.getName();
+
+    static final String leakyCommonsModelerClass =
+            "org.apache.commons.modeler.BaseModelMBean";
 }
