@@ -46,9 +46,8 @@
 
 package com.sun.jmx.remote.opt.util;
 
-
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ClassLogger {
 
@@ -63,14 +62,14 @@ public class ClassLogger {
 	    loaded = true;
 	} catch (Error e) {
 	    // OK.
-	    // log4j is not available in this jvm.
+	    // slf4j is not available in this jvm.
 	}
 	ok = loaded;
     }
 
     public ClassLogger(String subsystem, String className) {
 	if (ok)
-	    logger = Logger.getLogger(subsystem);
+	    logger = LoggerFactory.getLogger(subsystem);
 	else
 	    logger = null;
 	this.className = className;
@@ -85,27 +84,27 @@ public class ClassLogger {
     }
 
     public final boolean warningOn() {
-	return ok && logger.isEnabledFor(Level.WARN);
+	return ok && logger.isWarnEnabled();
     }
 
     public final boolean infoOn() {
-	return ok && logger.isEnabledFor(Level.INFO);
+	return ok && logger.isInfoEnabled();
     }
 
     public final boolean configOn() {
-	return ok && logger.isEnabledFor(Level.INFO);
+	return ok && logger.isInfoEnabled();
     }
 
     public final boolean fineOn() {
-	return ok && logger.isEnabledFor(Level.DEBUG);
+	return ok && logger.isDebugEnabled();
     }
 
     public final boolean finerOn() {
-	return ok && logger.isEnabledFor(Level.DEBUG);
+	return ok && logger.isDebugEnabled();
     }
 
     public final boolean finestOn() {
-	return ok && logger.isEnabledFor(Level.DEBUG);
+	return ok && logger.isDebugEnabled();
     }
 
     public final void debug(String func, String msg) {
@@ -146,106 +145,106 @@ public class ClassLogger {
 
     public final void finest(String func, String msg) {
 	if (ok)
-	    logger.log(Level.DEBUG, className + "." + func + " - " + msg);
+	    logger.debug(className + "." + func + " - " + msg);
     }
 
     public final void finest(String func, Throwable t) {
 	if (ok)
-	    logger.log(Level.DEBUG, className + "." + func, t);
+	    logger.debug(className + "." + func, t);
     }
 
     public final void finest(String func, String msg, Throwable t) {
 	if (ok)
-	    logger.log(Level.DEBUG, className + "." + func + " - " + msg, t);
+	    logger.debug(className + "." + func + " - " + msg, t);
     }
 
     public final void finer(String func, String msg) {
 	if (ok)
-	    logger.log(Level.DEBUG, className + "." + func + " - " + msg);
+	    logger.debug(className + "." + func + " - " + msg);
     }
 
     public final void finer(String func, Throwable t) {
 	if (ok)
-	    logger.log(Level.DEBUG, className + "." + func, t);
+	    logger.debug(className + "." + func, t);
     }
 
     public final void finer(String func, String msg, Throwable t) {
 	if (ok)
-	    logger.log(Level.DEBUG, className + "." + func + " - " + msg, t);
+	    logger.debug(className + "." + func + " - " + msg, t);
     }
 
     public final void fine(String func, String msg) {
 	if (ok)
-	    logger.log(Level.DEBUG, className + "." + func + " - " + msg);
+	    logger.debug(className + "." + func + " - " + msg);
     }
 
     public final void fine(String func, Throwable t) {
 	if (ok)
-	    logger.log(Level.DEBUG, className + "." + func, t);
+	    logger.debug(className + "." + func, t);
     }
 
     public final void fine(String func, String msg, Throwable t) {
 	if (ok)
-	    logger.log(Level.DEBUG, className + "." + func + " - " + msg, t);
+	    logger.debug(className + "." + func + " - " + msg, t);
     }
 
     public final void config(String func, String msg) {
 	if (ok)
-	    logger.log(Level.INFO, className + "." + func + " - " + msg);
+	    logger.info(className + "." + func + " - " + msg);
     }
 
     public final void config(String func, Throwable t) {
 	if (ok)
-	    logger.log(Level.INFO, className + "." + func, t);
+	    logger.info(className + "." + func, t);
     }
 
     public final void config(String func, String msg, Throwable t) {
 	if (ok)
-	    logger.log(Level.INFO, className + "." + func + " - " + msg, t);
+	    logger.info(className + "." + func + " - " + msg, t);
     }
 
     public final void info(String func, String msg) {
 	if (ok)
-	    logger.log(Level.INFO, className + "." + func + " - " + msg);
+	    logger.info(className + "." + func + " - " + msg);
     }
 
     public final void info(String func, Throwable t) {
 	if (ok)
-	    logger.log(Level.INFO, className + "." + func, t);
+	    logger.info(className + "." + func, t);
     }
 
     public final void info(String func, String msg, Throwable t) {
 	if (ok)
-	    logger.log(Level.INFO, className + "." + func + " - " + msg, t);
+	    logger.info(className + "." + func + " - " + msg, t);
     }
 
     public final void warning(String func, String msg) {
 	if (ok)
-	    logger.log(Level.WARN, className + "." + func + " - " + msg);
+	    logger.warn(className + "." + func + " - " + msg);
     }
 
     public final void warning(String func, Throwable t) {
 	if (ok)
-	    logger.log(Level.WARN, className + "." + func, t);
+	    logger.warn(className + "." + func, t);
     }
 
     public final void warning(String func, String msg, Throwable t) {
 	if (ok)
-	    logger.log(Level.WARN, className + "." + func + " - " + msg, t);
+	    logger.warn(className + "." + func + " - " + msg, t);
     }
 
     public final void severe(String func, String msg) {
 	if (ok)
-	    logger.log(Level.ERROR, className + "." + func + " - " + msg);
+	    logger.error(className + "." + func + " - " + msg);
     }
 
     public final void severe(String func, Throwable t) {
 	if (ok)
-	    logger.log(Level.ERROR, className + "." + func, t);
+	    logger.error(className + "." + func, t);
     }
 
     public final void severe(String func, String msg, Throwable t) {
 	if (ok)
-	    logger.log(Level.ERROR, className + "." + func + " - " + msg, t);
+	    logger.error(className + "." + func + " - " + msg, t);
     }
 }
