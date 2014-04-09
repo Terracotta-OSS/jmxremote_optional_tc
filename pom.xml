@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
@@ -10,9 +9,15 @@
 
     <groupId>org.terracotta</groupId>
     <artifactId>jmxremote_optional-tc</artifactId>
-    <version>1.0.5-SNAPSHOT</version>
+    <version>1.0.5</version>
     <name>Project OpenDMK's jmxremote_optional (with TC fixes)</name>
     <description>Based on opendmk-1.0-b02 (http://opendmk.dev.java.net/)</description>
+
+    <properties>
+        <metadata.build.jenkins.url>http://jenkins.terracotta.eur.ad.sag:8080/job/jmxremote_optional_tc_trunk_releaser/3/</metadata.build.jenkins.url>
+        <metadata.build.maven.active.profiles>terracotta-repositories,release,tc-publish</metadata.build.maven.active.profiles>
+        <metadata.svn.revision>43447</metadata.svn.revision>
+    </properties>
 
     <dependencies>
         <dependency>
