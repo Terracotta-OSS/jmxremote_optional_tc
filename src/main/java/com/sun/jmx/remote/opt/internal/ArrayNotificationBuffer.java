@@ -47,25 +47,27 @@
 
 package com.sun.jmx.remote.opt.internal;
 
-import java.io.IOException;
+import com.sun.jmx.remote.opt.util.ClassLogger;
+import com.sun.jmx.remote.opt.util.EnvHelp;
+
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.security.PrivilegedActionException;
 import java.security.PrivilegedExceptionAction;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.management.InstanceNotFoundException;
-import javax.management.ListenerNotFoundException;
-import javax.management.MalformedObjectNameException;
 import javax.management.MBeanServer;
 import javax.management.MBeanServerNotification;
+import javax.management.MalformedObjectNameException;
 import javax.management.Notification;
 import javax.management.NotificationBroadcaster;
 import javax.management.NotificationFilter;
@@ -74,12 +76,8 @@ import javax.management.NotificationListener;
 import javax.management.ObjectName;
 import javax.management.QueryEval;
 import javax.management.QueryExp;
-
 import javax.management.remote.NotificationResult;
 import javax.management.remote.TargetedNotification;
-
-import com.sun.jmx.remote.opt.util.EnvHelp;
-import com.sun.jmx.remote.opt.util.ClassLogger;
 
 /** A circular buffer of notifications received from an MBean server. */
 public class ArrayNotificationBuffer implements NotificationBuffer {
@@ -780,14 +778,25 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
              * in BaseModelMBean based MBeans.
              *
              * This was fun to track.
+             *
+             *
+             * TAB-4437 update:
+             *
+             * Tomcat doesn't use Commons Modeler anymore, but embeds the BaseModelMBean
+             * class in its own package structure, meaning that they did not fix the bug
+             * but renamed the class. This made the existing workaround ineffective as
+             * it checks for a specific class name. Hence, the code checks for both class
+             * names now.
              */
-            boolean leakyNotificationBroadcaster = isInstanceOf(mbs, name, leakyCommonsModelerClass);
-            if (leakyNotificationBroadcaster) {
-                if (logger.debugOn()) {
-                    logger.debug("BroadcasterQuery.apply",
+            for (String leakyCommonsModelerClass : leakyCommonsModelerClasses) {
+                boolean leakyNotificationBroadcaster = isInstanceOf(mbs, name, leakyCommonsModelerClass);
+                if (leakyNotificationBroadcaster) {
+                    if (logger.debugOn()) {
+                        logger.debug("BroadcasterQuery.apply",
                             "ignoring leaky Commons Modeler NotificationBroadcaster");
+                    }
+                    return false;
                 }
-                return false;
             }
 
             return isInstanceOf(mbs, name, broadcasterClass);
@@ -871,6 +880,6 @@ public class ArrayNotificationBuffer implements NotificationBuffer {
     static final String broadcasterClass =
         NotificationBroadcaster.class.getName();
 
-    static final String leakyCommonsModelerClass =
-            "org.apache.commons.modeler.BaseModelMBean";
+    static final List<String> leakyCommonsModelerClasses = Arrays.asList(
+            "org.apache.commons.modeler.BaseModelMBean", "org.apache.tomcat.util.modeler.BaseModelMBean");
 }
