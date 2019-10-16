@@ -65,7 +65,7 @@ package javax.management.remote.message;
  * <ul>
  * <li>Both versions are equal, in which case the client continues with the
  *     profiles' negotiation.</li>
- * <li>The client version is greater than the server version and:</li>
+ * <li>The client version is greater than the server version and:
  *     <ul>
  *     <li>The client can work with a lower version that matches the
  *         server's version, in which case it switches to the server's version
@@ -74,10 +74,10 @@ package javax.management.remote.message;
  *         version, in which case it sends a
  *         {@link HandshakeErrorMessage HandshakeErrorMessage} and closes the
  *         connection.</li>
- *     </ul>
+ *     </ul></li>
  * <li>The server version is greater than the client version so the client sends
  *     a {@link VersionMessage VersionMessage} specifying the client version
- *     and:</li>
+ *     and:
  *     <ul>
  *     <li>The server can work with a lower version that matches the client's
  *         version, in which case it sends a
@@ -89,7 +89,7 @@ package javax.management.remote.message;
  *         {@link HandshakeErrorMessage HandshakeErrorMessage} and closes the
  *         connection. Upon reception of this message the client should close
  *         the connection immediately.</li>
- *     </ul>
+ *     </ul></li>
  * </ul>
  *
  * <p>Once the JMXMP protocol versions to use have been negotiated,
