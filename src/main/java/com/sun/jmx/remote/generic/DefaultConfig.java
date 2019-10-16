@@ -265,7 +265,7 @@ public class DefaultConfig {
     /** 
      * Returns the timeout in milliseconds for a client to wait for
      * its state to become connected.  The default timeout is 1
-     * second.</p>
+     * second.
      */
     public static long getTimeoutForWaitConnectedState(Map env) {
 	return EnvHelp.getIntegerAttribute(env, TIMEOUT_FOR_CONNECTED_STATE,
