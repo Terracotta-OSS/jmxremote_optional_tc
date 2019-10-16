@@ -195,7 +195,7 @@ public class ProfileServerFactory {
      * @param environment a read-only Map containing named attributes
      * to determine how the profile is created. Keys in this map must
      * be Strings. The appropriate type of each associated value
-     * depends on the attribute.</p>
+     * depends on the attribute.
      *
      * @return a <code>ProfileServer</code> representing the new profile.
      * Each successful call to this method produces a different object.

@@ -119,7 +119,7 @@ public interface MessageConnection {
      * <p>The ID for this connection.</p>
      *
      * @return the ID for this connection.  This method can return
-     * null if the connection handshake is not yet complete.</p>
+     * null if the connection handshake is not yet complete.
      */
     public String getConnectionId();
 }

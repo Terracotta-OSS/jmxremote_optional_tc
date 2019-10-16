@@ -271,8 +271,8 @@ public abstract class ClientNotifForwarder {
 
     /**
      * Called after reconnection is finished.
-     * This method is intended to be called only by a client connetor:
-     * <code>RMIConnector</code/> and <code/>ClientIntermediary</code>.
+     * This method is intended to be called only by a client connector:
+     * <code>RMIConnector</code> and <code>ClientIntermediary</code>.
      */
     public synchronized void postReconnection(ClientListenerInfo[] listenerInfos)
 	throws IOException {
