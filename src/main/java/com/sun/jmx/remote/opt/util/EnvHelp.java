@@ -133,6 +133,7 @@ public class EnvHelp {
      *     <tt>jmx.remote.default.class.loader.name</tt> is specified
      *     but <var>mbs</var> is null.
      * </li>
+     * </ul>
      * @exception InstanceNotFoundException if
      * <tt>jmx.remote.default.class.loader.name</tt> is specified
      * and the ClassLoader MBean is not found in <var>mbs</var>.
@@ -238,7 +239,7 @@ public class EnvHelp {
     /**
      * Init the cause field of a Throwable object.
      * The cause field is set only if <var>t</var> has an
-     * {@link Throwable#initCause(Throwable)} method (JDK Version >= 1.4)
+     * {@link Throwable#initCause(Throwable)} method (JDK Version &gt;= 1.4)
      * @param t Throwable on which the cause must be set.
      * @param cause The cause to set on <var>t</var>.
      * @return <var>t</var> with or without the cause field set.
@@ -266,7 +267,7 @@ public class EnvHelp {
     /**
      * Returns the cause field of a Throwable object.  
      * The cause field can be got only if <var>t</var> has an 
-     * {@link Throwable#getCause()} method (JDK Version >= 1.4) 
+     * {@link Throwable#getCause()} method (JDK Version &gt;= 1.4)
      * @param t Throwable on which the cause must be set.
      * @return the cause if getCause() succeeded and the got value is not
      * null, otherwise return the <var>t</var>.
