@@ -9,11 +9,15 @@
 
     <groupId>org.terracotta</groupId>
     <artifactId>jmxremote_optional-tc</artifactId>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.0.8</version>
     <name>Project OpenDMK's jmxremote_optional (with TC fixes)</name>
     <description>Based on opendmk-1.0-b02 (http://opendmk.dev.java.net/)</description>
 
     <properties>
+    
+        <metadata.build.jenkins.url>http://jenkins.terracotta.eur.ad.sag:8080/job/jmxremote_optional_tc_trunk_releaser/10/</metadata.build.jenkins.url>
+        <metadata.build.maven.active.profiles>terracotta-repositories,release,tc-publish,fullmode</metadata.build.maven.active.profiles>
+        <metadata.svn.revision>53106</metadata.svn.revision>
     </properties>
 
     <dependencies>
